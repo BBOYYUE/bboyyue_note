@@ -150,9 +150,9 @@ truncate table table_name ; 清空一个表, 父表总是不能被清空, 清空
 ### 表数据查询
 
 ```
-select distinct filed_name from table_name where filed_name = value group by filed_name_2 having filed_name_2 > 2 order by filed_name_2 > 1 limit start length;
+select distinct filed_name from table_name where filed_name = value group by filed_name_2 having filed_name_2 > 2 order by filed_name_2 > 1 limit start length; 不含重复结果的 sql 语句
 
-select a.filed_name,b.filed_name from table_name_1 as a left join table_name_2  as b on a.id = b.id where a.id > 1;
+select a.filed_name,b.filed_name from table_name_1 as a left join table_name_2  as b on a.id = b.id where a.id > 1; 简单的 left join
 
 select a.filed_name,b.filed_name from table_name_1 as a inner join table_name_2 as b on a.id = b.id where a.name is null; null 不能用等于来进行判断. 
 
@@ -174,7 +174,7 @@ select field_name_2 from table_name_2 where field_name_2 > all (select field_nam
 
 select field_name_1 from table_name where match (filed_name_1 ,filed_name_2) against ('whosyourdaddy'); 全文检索 查询结果按关联度进行排序, 如果查询的结果中,权重超过 50% 的值会被忽略, 权重越低的值越容易被查出来,
 
-
+select field_name from table_name where field_name is null for update; 在事务中，该查询会阻塞别的事务中的该查询。举个例子，比如这个事务开始时，跑了一下这个查询，这条语句就会被锁起来， 这个事务结束之前， 这条语句无法在被执行。 
 
 ```
 ### 常用函数
@@ -189,5 +189,7 @@ min() 最小值
 
 avg() 平均数
 
-group_concat()
+group_concat()  可以组合字符串
+
+to_days()  到今天的时间
 
