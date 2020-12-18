@@ -60,6 +60,8 @@ constraint 约束,后面可以跟约束名和约束类型
 ```
 ### 数据库维护相关
 ```
+select * from information_schema.SCHEMATA where SCHEMA_NAME = 'databasename'; 查询某个数据库是否存在
+
 show variables like 'character%'; 查看当前会话使用的字符集
 
 show databases;
@@ -92,11 +94,17 @@ show index from table_name ; 展示索引
 
 show variables like 'ft_ stopword_ file'; 展示保留字
 
+show grants for cmfac@%;
+
 ```
 
 ### 数据表结构管理
 
 ```
+alter TABLE alpha_operation_log CHANGE updated_at updated_at timestamp NULL ON UPDATE CURRENT_TIMESTAMP;
+
+alter TABLE alpha_operation_log CHANGE created_at created_at timestamp NULL DEFAULT  CURRENT_TIMESTAMP;
+
 create table table_name ( field_name varchar(255) bigint primary_key auto_ increment);
 
 alter table table_name drop field_name; 删除表字段
@@ -106,6 +114,8 @@ alter table table_name drop index index; 删除主键
 alter table table_name add field_name char(20) not null after field_name_2; 新增字段
 
 alter table table_name change old_field_name new_field_name varchar(20); 修改字段类型
+
+alter table alpha_user ADD CONSTRAINT field_name UNIQUE (field_name);
 
 alter table table_name modify varchar(20); 修改字段类型
 
